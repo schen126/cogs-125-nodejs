@@ -3,8 +3,8 @@ self.__BUILD_MANIFEST = {
     "afterFiles": [],
     "beforeFiles": [
       {
-        "source": "/your-repository-name//_next/:path+",
-        "destination": "/your-repository-name/_next/:path+"
+        "source": "/cogs-125-nodejs//_next/:path+",
+        "destination": "/cogs-125-nodejs/_next/:path+"
       }
     ],
     "fallback": []
