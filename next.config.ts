@@ -6,9 +6,9 @@ const nextConfig = {
   images: {
     unoptimized: true, // Disable default image optimization
   },
-  assetPrefix: isProd ? '/your-repository-name/' : '',
-  basePath: isProd ? '/your-repository-name' : '',
-  output: 'export'
+  assetPrefix: isProd ? '/cogs-125-nodejs/' : '',
+  basePath: isProd ? '/cogs-125-nodejs' : '',
+  output: 'export',
 };
 
 export default nextConfig;
