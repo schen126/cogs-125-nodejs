@@ -157,7 +157,7 @@ export default function Scene() {
           Hi, I'm Serena
         </h1>
         <a
-          href="resume.pdf"
+          href="this_is_a_virus.pdf"
           /*target="_blank"
           rel="noopener noreferrer"*/
           download="this_is_a_virus.pdf"
