@@ -6,7 +6,7 @@ const Scene = dynamic(() => import('./Scene'), { ssr: false })
 
 export default function SceneLoader() {
   return (
-    <div style={{ width: '100%', height: '600px' }}>
+    <div style={{ width: '100%', height: '90vh' }}>
       <Scene />
     </div>
   )

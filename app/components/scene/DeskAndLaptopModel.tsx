@@ -4,8 +4,8 @@ Command: npx gltfjsx@6.5.3 public/models/desk-model-optimized.glb -o app/compone
 */
 
 import * as THREE from 'three'
-import React from 'react'
-import { useGLTF } from '@react-three/drei'
+import React, { useRef } from 'react'
+import { useGLTF, Html } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
 
 type GLTFResult = GLTF & {
@@ -42,8 +42,21 @@ type GLTFResult = GLTF & {
   animations: THREE.AnimationClip[]
 }
 
-export function Model(props: React.JSX.IntrinsicElements['group']) {
+type ModelProps = React.JSX.IntrinsicElements['group'] & {
+  onScreenClick?: (worldPos: THREE.Vector3) => void
+}
+
+export function Model({ onScreenClick, ...props }: ModelProps) {
   const { nodes, materials } = useGLTF('/models/desk-model-optimized.glb') as unknown as GLTFResult
+  const screenRef = useRef<THREE.Group>(null)
+
+  const handleScreenClick = () => {
+    if (!onScreenClick || !screenRef.current) return
+    const localCenter = new THREE.Vector3(0, 3, 0)
+    localCenter.applyMatrix4(screenRef.current.matrixWorld)
+    onScreenClick(localCenter)
+  }
+
   return (
     <group {...props} dispose={null}>
       <group position={[-0.023, -0.097, -0.029]}>
@@ -60,12 +73,43 @@ export function Model(props: React.JSX.IntrinsicElements['group']) {
         <mesh geometry={nodes.Cube013_1.geometry} material={materials.PaletteMaterial004} />
       </group>
       <mesh geometry={nodes.Cube004.geometry} material={materials.PaletteMaterial005} position={[-0.22, 0.629, -0.12]} rotation={[0.001, 0, 0]} scale={[0.003, 0.002, 0.004]} />
-      <group position={[-0.015, 0.626, -0.149]} rotation={[1.309, 0, 0]} scale={0.143}>
+      <group
+        ref={screenRef}
+        position={[-0.015, 0.626, -0.149]}
+        rotation={[1.309, 0, 0]}
+        scale={0.143}
+        onClick={handleScreenClick}
+        onPointerOver={(e) => {
+          e.stopPropagation()
+          if (onScreenClick) document.body.style.cursor = 'pointer'
+        }}
+        onPointerOut={() => {
+          document.body.style.cursor = 'auto'
+        }}
+      >
         <mesh geometry={nodes.Cube001_1.geometry} material={materials.screen} />
         <mesh geometry={nodes.Cube001_2.geometry} material={materials.PaletteMaterial006} />
         <mesh geometry={nodes.Cube001_3.geometry} material={materials.PaletteMaterial008} />
         <mesh geometry={nodes.Cube001_4.geometry} material={materials['Apple-logo']} />
         <mesh geometry={nodes.Cube001_5.geometry} material={materials.PaletteMaterial007} />
+        {onScreenClick && (
+          <Html center>
+            <div
+              style={{
+                color: 'white',
+                fontSize: '11px',
+                pointerEvents: 'none',
+                whiteSpace: 'nowrap',
+                background: 'rgba(0,0,0,0.55)',
+                padding: '3px 8px',
+                borderRadius: '4px',
+                userSelect: 'none',
+              }}
+            >
+              click here!
+            </div>
+          </Html>
+        )}
       </group>
     </group>
   )
