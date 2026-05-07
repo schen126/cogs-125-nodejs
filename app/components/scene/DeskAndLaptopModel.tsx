@@ -44,7 +44,7 @@ type GLTFResult = GLTF & {
 
 type ModelProps = React.JSX.IntrinsicElements['group'] & {
   onScreenClick?: (worldPos: THREE.Vector3) => void
-  screenSurfaceRef?: React.RefObject<THREE.Mesh>
+  screenSurfaceRef?: React.RefObject<THREE.Mesh | null>
 }
 
 export function Model({ onScreenClick, screenSurfaceRef, ...props }: ModelProps) {

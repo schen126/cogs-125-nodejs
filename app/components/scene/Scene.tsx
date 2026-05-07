@@ -15,8 +15,8 @@ function ScreenOverlayTracker({
   meshRef,
   overlayRef,
 }: {
-  meshRef: React.RefObject<THREE.Mesh>
-  overlayRef: React.RefObject<HTMLDivElement>
+  meshRef: React.RefObject<THREE.Mesh | null>
+  overlayRef: React.RefObject<HTMLDivElement | null>
 }) {
   const { camera, size } = useThree()
   const _box = useRef(new THREE.Box3())
@@ -59,7 +59,7 @@ interface CameraRigProps {
   setZoomed: (v: boolean) => void
   setShowOverlay: (v: boolean) => void
   goBackRef: React.MutableRefObject<() => void>
-  screenSurfaceRef: React.RefObject<THREE.Mesh>
+  screenSurfaceRef: React.RefObject<THREE.Mesh | null>
 }
 
 function CameraRig({ zoomed, setZoomed, setShowOverlay, goBackRef, screenSurfaceRef }: CameraRigProps) {
