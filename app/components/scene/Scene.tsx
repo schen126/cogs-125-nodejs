@@ -4,7 +4,7 @@ import { Suspense, useState, useRef } from 'react'
 import { Canvas, useThree, useFrame } from '@react-three/fiber'
 import { OrbitControls, Environment, Center } from '@react-three/drei'
 import { Model } from './DeskAndLaptopModel'
-import {playwrite} from '../../fonts'
+import { OverlayContent } from '../overlay/OverlayContent'
 import * as THREE from 'three'
 import gsap from 'gsap'
 
@@ -178,50 +178,14 @@ export default function Scene() {
           position: 'absolute',
           top: 0,
           left: 0,
-          background: 'rgb(255, 255, 255)',
-          color: 'black',
-          borderRadius: '4px',
-          padding: '2rem',
           opacity: showOverlay ? 1 : 0,
           animation: showOverlay ? 'flicker-in 0.8s ease forwards' : 'none',
           pointerEvents: showOverlay ? 'auto' : 'none',
-          display: 'flex',
-          justifyContent: 'center',
-          flexDirection: 'column',
-          alignItems: 'center',
           overflow: 'hidden',
+          borderRadius: 4,
         }}
       >
-        <h1 style={{ 
-          fontSize: '2.5rem',
-          fontWeight: 'bold',
-          fontFamily: playwrite.style.fontFamily,
-          animation: showOverlay 
-            ? 'fade-in-text 0.5s ease 0.9s forwards': 'none', 
-          opacity: 0,
-        }}>
-          Hi, I'm Serena
-        </h1>
-        <a
-          href="this_is_a_virus.pdf"
-          /*target="_blank"
-          rel="noopener noreferrer"*/
-          download="this_is_a_virus.pdf"
-          style={{
-            display: 'inline-block',
-            marginTop: '1rem',
-            padding: '0.6rem 1.5rem',
-            background: 'black',
-            color: 'white',
-            borderRadius: '6px',
-            textDecoration: 'none',
-            fontSize: '1rem',
-            animation: showOverlay ? 'fade-in-text 0.5s ease 1.2s forwards' : 'none',
-            opacity: 0,
-          }}
-        >
-          View my resume here
-        </a>
+        <OverlayContent />
       </div>
     </div>
   )
