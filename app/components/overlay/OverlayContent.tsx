@@ -82,20 +82,6 @@ function HomeSection() {
       >
         Hi, I&apos;m Serena
       </h1>
-      <p
-        style={{
-          margin: 0,
-          fontSize: 13,
-          color: '#666',
-          textAlign: 'center',
-          maxWidth: 320,
-          lineHeight: 1.7,
-        }}
-      >
-        {/* Update this tagline */}
-        Cognitive Science student at UC San Diego. I build things that live at
-        the intersection of design and technology.
-      </p>
       <a
         href="this_is_a_virus.pdf"
         download="this_is_a_virus.pdf"
