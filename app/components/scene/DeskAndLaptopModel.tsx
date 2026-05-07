@@ -44,9 +44,10 @@ type GLTFResult = GLTF & {
 
 type ModelProps = React.JSX.IntrinsicElements['group'] & {
   onScreenClick?: (worldPos: THREE.Vector3) => void
+  screenSurfaceRef?: React.RefObject<THREE.Mesh>
 }
 
-export function Model({ onScreenClick, ...props }: ModelProps) {
+export function Model({ onScreenClick, screenSurfaceRef, ...props }: ModelProps) {
   const { nodes, materials } = useGLTF('/models/desk-model-optimized.glb') as unknown as GLTFResult
   const screenRef = useRef<THREE.Group>(null)
 
@@ -87,7 +88,7 @@ export function Model({ onScreenClick, ...props }: ModelProps) {
           document.body.style.cursor = 'auto'
         }}
       >
-        <mesh geometry={nodes.Cube001_1.geometry} material={materials.screen} />
+        <mesh ref={screenSurfaceRef} geometry={nodes.Cube001_1.geometry} material={materials.screen} />
         <mesh geometry={nodes.Cube001_2.geometry} material={materials.PaletteMaterial006} />
         <mesh geometry={nodes.Cube001_3.geometry} material={materials.PaletteMaterial008} />
         <mesh geometry={nodes.Cube001_4.geometry} material={materials['Apple-logo']} />
